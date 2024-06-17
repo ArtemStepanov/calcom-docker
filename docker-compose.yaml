@@ -5,8 +5,7 @@ volumes:
   database-data:
 
 networks:
-  stack:
-    name: stack
+  web:
     external: false
 
 services:
@@ -16,9 +15,9 @@ services:
     restart: always
     volumes:
       - database-data:/var/lib/postgresql/data/
-    env_file: .env
+    env_file: stack.env
     networks:
-      - stack
+      - web
 
   calcom:
     image: calcom.docker.scarf.sh/calcom/cal.com
@@ -40,7 +39,7 @@ services:
       - stack
     ports:
       - 3000:3000
-    env_file: .env
+    env_file: stack.env
     environment:
       - DATABASE_URL=postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@${DATABASE_HOST}/${POSTGRES_DB}
       - DATABASE_DIRECT_URL=${DATABASE_URL}
@@ -52,7 +51,7 @@ services:
     image: calcom.docker.scarf.sh/calcom/cal.com
     restart: always
     networks:
-      - stack
+      - web
     ports:
       - 5555:5555
     env_file: .env
