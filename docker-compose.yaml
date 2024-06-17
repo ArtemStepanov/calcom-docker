@@ -36,9 +36,7 @@ services:
       network: stack
     restart: always
     networks:
-      - stack
-    ports:
-      - 3000:3000
+      - web
     env_file: stack.env
     environment:
       - DATABASE_URL=postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@${DATABASE_HOST}/${POSTGRES_DB}
@@ -52,8 +50,6 @@ services:
     restart: always
     networks:
       - web
-    ports:
-      - 5555:5555
     env_file: .env
     environment:
       - DATABASE_URL=postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@${DATABASE_HOST}/${POSTGRES_DB}
