@@ -50,7 +50,7 @@ services:
     restart: always
     networks:
       - web
-    env_file: .env
+    env_file: stack.env
     environment:
       - DATABASE_URL=postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@${DATABASE_HOST}/${POSTGRES_DB}
       - DATABASE_DIRECT_URL=${DATABASE_URL}
